@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mytablesystem;
 
 import Classes.Customer;
@@ -18,10 +14,6 @@ import java.util.logging.Logger;
 import java.util.Scanner;
 
 
-/**
- *
- * @author Nora1
- */
 public class MyTableSystem {
 public static Customer customer;
     static Admin admin;
@@ -112,6 +104,11 @@ static Scanner in;
 
         System.out.println("New Resturant Added");
 
+    }
+      private static void deleteResturant() {
+        System.out.print("Please Enter Resturant Id: ");
+        int id = in.nextInt();
+        admin.deleteResturant(id, resturants);
     }
       private static void viewResturant() {
         if (resturants.isEmpty()) {
