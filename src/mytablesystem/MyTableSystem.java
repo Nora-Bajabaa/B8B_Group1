@@ -69,7 +69,28 @@ static Scanner in;
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+  static void displayMainMenu() {
+        System.out.println("-------------------MY TABLE---------------");
+        System.out.println("1- Admin");
+        System.out.println("2- Customer");
+        System.out.println("3- exit");  
+        System.out.println("------------------------------------------");
+        System.out.print("Kindly choose from the menu: ");
+    }
+    static void displayAdminMenu() {
+        System.out.println("\n------------------MY TABLE----------------");
+        System.out.println("1- Add Resturant");
+        System.out.println("2- Delete Resturant");
+        System.out.println("3- Exit");
+    }
+     static void displayCustomerMenu() {
+        System.out.println("\n------------------MY TABLE----------------");
+        System.out.println("1- Register");
+        System.out.println("2- View Resturant");
+        System.out.println("3- Make Reservations");
+        System.out.println("4- Cancel Reservation");
+        System.out.println("5- Exit");
+    }
  
      private static void addResturant() {
         System.out.println("Enter Resturat Information Please");
@@ -91,6 +112,66 @@ static Scanner in;
 
         System.out.println("New Resturant Added");
 
+    }
+      private static void viewResturant() {
+        if (resturants.isEmpty()) {
+            System.out.println("There is no avaiable resturants :(");
+            System.out.println("");
+            return;
+        }
+
+        System.out.println("Avaialable Resturants:");
+
+        for (Resturant resturant : resturants) {
+            System.out.println(resturant.getId() + ": " + resturant.getName());
+            System.out.println("Type: " + resturant.getType());
+            System.out.println("Phone Numebr: " + resturant.getPhoneNumber());
+            System.out.println("Location: " + resturant.getLocation());
+            System.out.println("--------------------------------------------------");
+        }
+
+        System.out.println("");
+
+    }
+
+      private static void makeResrvation() {
+
+        if (customer == null) {
+            System.out.println("Sorry! you need to register first :(");
+            System.out.println("");
+            return;
+        }
+
+        viewResturant();
+
+        System.out.print("Kindly enter resturant number: ");
+        int resId = in.nextInt();
+
+        try {
+            Resturant r = resturants.get(resId - 1);
+
+            System.out.print("Enter number Of People: ");
+            int numOfPeople = in.nextInt();
+
+            System.out.print("Enter table number: ");
+            int tableNumber = in.nextInt();
+
+            System.out.print("Enter number Of hours: ");
+            int numOfHours = in.nextInt();
+
+            System.out.print("Enter Date of Reservation(dd/MM/yyyy): ");
+            String date = in.next();
+
+            Reservation res = customer.makeReservation(numOfPeople, tableNumber, numOfHours, date, r);
+
+            if (res != null) {
+                FileHelper.printReservation(res, customer);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Wrong coice!! try again later");
+            System.out.println("");
+        }
     }
 
   
