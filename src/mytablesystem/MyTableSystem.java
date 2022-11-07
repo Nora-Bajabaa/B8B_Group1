@@ -1,4 +1,3 @@
-
 package mytablesystem;
 
 import Classes.Customer;
@@ -115,6 +114,28 @@ static Scanner in;
         System.out.println("3- Make Reservations");
         System.out.println("4- Cancel Reservation");
         System.out.println("5- Exit");
+    }
+     private static void registerCustomer() {
+        if (customer != null) {
+            System.out.println("You already registerd :)");
+            System.out.println("");
+            return;
+        }
+        System.out.println("Enter your Information:");
+        System.out.print("Name: ");
+        String name = in.next();
+        System.out.print("Phone Number: ");
+        String phoneNumber = in.next();
+
+        System.out.print("Email: ");
+        String email = in.next();
+
+        System.out.print("Password: ");
+        String password = in.next();
+
+        customer = new Customer(name, 1, phoneNumber, email, password);
+        System.out.println("Customer " + name + " registered");
+        System.out.println("");
     }
  
      private static void addResturant() {
