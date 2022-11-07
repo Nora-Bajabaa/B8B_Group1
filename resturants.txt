@@ -1,0 +1,3 @@
+1, resturant1, pizza, riyadh, 0512345678
+2, resturant2, pasta, riyadh, 0512345678
+3, resturant3, food, riyadh, 0512345678
