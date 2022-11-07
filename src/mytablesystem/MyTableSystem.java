@@ -46,7 +46,40 @@ static Scanner in;
             System.out.println("Wrong Choice Try again !!!");
             System.out.println("\n");
         }
+                
     }
+    private static void adminProcess() {
+        admin = new Admin();
+
+        while (true) {
+            displayAdminMenu();
+            System.out.print("choose what do you want to do as Admin: ");
+            int adminChoice = in.nextInt();
+
+            if (adminChoice < 1 && adminChoice > 3) {
+                System.out.println("Wrong choice try again!!");
+                System.out.println("\n");
+                continue;
+            }
+
+            if (adminChoice == 3) {
+                System.out.println("Logged out! See you soon :)");
+                System.exit(0);
+            }
+
+            if (adminChoice == 1) {
+                addResturant();
+                System.out.println("\n");
+            }
+
+            if (adminChoice == 2) {
+                deleteResturant();
+            }
+
+        }
+    }
+
+    
      private static void initSystem() {
         // init variables
         in = new Scanner(System.in);
@@ -58,7 +91,7 @@ static Scanner in;
             resturants = FileHelper.loadResturants();
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyTableSystem.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
   static void displayMainMenu() {
@@ -110,12 +143,50 @@ static Scanner in;
         int id = in.nextInt();
         admin.deleteResturant(id, resturants);
     }
+       private static void customerProcess() {
+
+        while (true) {
+            displayCustomerMenu();
+            System.out.print("kindly choose from the menu: ");
+            int customerChoice = in.nextInt();
+
+            if (customerChoice < 1 && customerChoice > 5) {
+                System.out.println("Wrong choice try again!!");
+                System.out.println("\n");
+                continue;
+            }
+
+            if (customerChoice == 5) {
+                System.out.println("Logged out! See you soon :)");
+                System.exit(0);
+            }
+
+            if (customerChoice == 1) {
+                registerCustomer();
+            }
+
+            if (customerChoice == 2) {
+                viewResturant();
+            }
+
+            if (customerChoice == 3) {
+                makeResrvation();
+            }
+
+            if (customerChoice == 4) {
+                cancelResrvation();
+            }
+        }
+
+    }
+
       private static void viewResturant() {
         if (resturants.isEmpty()) {
             System.out.println("There is no avaiable resturants :(");
             System.out.println("");
             return;
         }
+        
 
         System.out.println("Avaialable Resturants:");
 
@@ -169,9 +240,26 @@ static Scanner in;
             System.out.println("Wrong coice!! try again later");
             System.out.println("");
         }
+        
     }
 
-  
+  private static void cancelResrvation() {
+        if (customer == null) {
+            System.out.println("Sorry! you need to register first :(");
+            System.out.println("");
+            return;
+        }
+        
+        customer.printReservaionList();
+        
+        System.out.print("Please enter reservation id: ");
+        int resId = in.nextInt();
+        
+        customer.cancelReservation(resId);
     }
+
+}
+
+    
     
 

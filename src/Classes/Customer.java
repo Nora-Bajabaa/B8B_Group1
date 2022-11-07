@@ -36,6 +36,22 @@ public class Customer extends User {
     public void setReservations(ArrayList<Reservation> reservations) {
         this.reservations = reservations;
     }
+     public boolean cancelReservation(int reservationId) {
+        try {
+            Reservation r = reservations.get(reservationId - 1);
+            
+            r.setStatus("Canceled");
+            System.out.println("Reservation Number " + reservationId + " Canceled");
+            
+            return true;
+        } catch (Exception e) {
+            
+            System.out.println("Reservation Not Found, Try again later :)");
+            System.out.println("");
+            
+            return false;
+        }
+    }
      public Reservation makeReservation(int numOfPeople, int tableNumber, int numOfHours, String date, Resturant r) {
 
         try {
